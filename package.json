@@ -11,7 +11,8 @@
 		"build:css": "npm run css:clean && npm run css:compile",
 		"build:css:watch": "onchange -i './src/assets/css/*.scss' './src/assets/css/*.css' -- npm run build:css",
 		"dev": "node esbuild.config.mjs --define:MDM_DEBUG=true",
-		"dev:silent": "node esbuild.config.mjs --define:MDM_DEBUG=false"
+		"dev:silent": "node esbuild.config.mjs --define:MDM_DEBUG=false",
+		"verify": "./scripts/verify-build.sh"
 	},
 	"keywords": [],
 	"author": "",

@@ -49,6 +49,68 @@ For complete documentation : https://mdelobelle.github.io/metadatamenu
 
 [demo 16](https://youtu.be/Q0fPp3C3EaA): Fileclass tableviews
 
+# Development
+
+## Local Build Environment
+
+To set up a local development environment for this plugin:
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Build the plugin:**
+   ```bash
+   # Build TypeScript and bundle with esbuild
+   npm run build
+   
+   # Build CSS styles
+   npm run build:css
+   ```
+
+3. **Development mode (with watch):**
+   ```bash
+   # Watch mode with debug enabled
+   npm run dev
+   
+   # Watch mode without debug output
+   npm run dev:silent
+   ```
+
+4. **CSS development:**
+   ```bash
+   # Build CSS once
+   npm run build:css
+   
+   # Watch CSS changes
+   npm run build:css:watch
+   ```
+
+## Testing
+
+The plugin includes a test vault at `test-vault-mdm/` that gets automatically updated with the latest build. You can use this to test your changes in Obsidian.
+
+## Release Process
+
+When you're ready to create a release:
+
+1. **Update version numbers:**
+   ```bash
+   npm run version
+   ```
+
+2. **Create and push a tag:**
+   ```bash
+   git tag v1.0.0
+   git push origin v1.0.0
+   ```
+
+The GitHub Actions workflow will automatically:
+- Build the plugin
+- Create a GitHub release
+- Attach the built files (`main.js`, `styles.css`, `manifest.json`)
+
 # General concepts
 
 Metadata Menu can manage any metadata field located in frontmatter (YAML syntax) or in the body of the note with the syntax `field::` (dataview style)
