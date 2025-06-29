@@ -305,7 +305,15 @@ export default class FieldIndex extends FieldIndexBuilder {
         this.indexableFileClasses().forEach(f => {
             const fileClassName = getFileClassNameFromPath(this.settings, f.path)
             if (fileClassName) {
-                const parents: string[] = this.plugin.app.metadataCache.getFileCache(f)?.frontmatter?.extends || []
+                const _parents = this.plugin.app.metadataCache.getFileCache(f)?.frontmatter?.extends
+                // Handle both old single parent format (string) and new multiple parents format (array)
+                let parents: string[] = []
+                if (Array.isArray(_parents)) {
+                    parents = _parents
+                } else if (typeof _parents === "string" && _parents.trim()) {
+                    parents = [_parents.trim()]
+                }
+                
                 const files: string[] = []
                 parents.forEach((p) => {
                     if (this.plugin.app.vault.getAbstractFileByPath(`${this.classFilesPath || ""}${p}.md`)) {

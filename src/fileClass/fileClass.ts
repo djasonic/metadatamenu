@@ -137,7 +137,15 @@ class FileClass {
 			fieldsOrder: _fieldsOrder
 		} = this.plugin.app.metadataCache.getFileCache(this.getClassFile())?.frontmatter as Record<string, any> || {}
 		const index = this.plugin.fieldIndex
-		const parents = _parents || [];
+		
+		// Handle both old single parent format (string) and new multiple parents format (array)
+		let parents: string[] = []
+		if (Array.isArray(_parents)) {
+			parents = _parents
+		} else if (typeof _parents === "string" && _parents.trim()) {
+			parents = [_parents.trim()]
+		}
+		
 		const excludedNames = getExcludedFieldsFromFrontmatter(_excludes);
 
 		const excludes: FileClassAttribute[] = []
