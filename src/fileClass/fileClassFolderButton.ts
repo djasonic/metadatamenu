@@ -54,6 +54,10 @@ export class FileClassFolderButton extends Component {
         const fCFolderPath = plugin.settings.classFilesPath?.replace(/\/$/, "")
         const explorerView = plugin.app.workspace.getLeavesOfType("file-explorer")?.[0]?.view as ExplorerView
         if (!explorerView || !fCFolderPath) return
+        if (!explorerView.fileItems) {
+            // Can happen if the sidebar containing the explorerView is reduced (e.g. in zen mode)
+            return
+        }
         const fCFolder = explorerView.fileItems[fCFolderPath]
         if (!fCFolder) return
         const container = fCFolder.selfEl
